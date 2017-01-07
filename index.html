@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>2012061020 이장훈</title>
+
+    <style>
+
+        html {
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+        .header {
+            position: relative;
+            right: 0;
+            top: 0;
+            left: 0;
+            text-align: center;
+            height:50px;
+        }
+
+        body {
+            position: relative;
+            margin: 0;
+            padding-bottom: 6rem;
+            min-height: 100%;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+        }
+        
+        .footer {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding: 1rem;
+            background-color: #efefef;
+            text-align: center;
+            font-family:'휴먼편지체','휴먼매직체','맑은 고딕';
+        }
+
+        .tab-menu{
+            list-style: none ;
+            height: 80px ;
+        }
+
+        .tab-menu li{
+            width:99px ;
+            height:40px ;
+            background-position-y:0;
+            text-indent: -1000px;
+            overflow: hidden;;
+            display: inline-block;
+        }
+
+        .tab-menu li:hover {
+            background-position-y: -40px;
+        }
+
+        .tab-menu li.select {
+            background-position-y: -80px;
+            height:80px;
+        }
+
+        .tab-menu li.menuitem1 {
+            background-image: url(./images/newbtn.bar.1.png);
+        }
+
+        .tab-menu li.menuitem2{
+            background-image: url(./images/newbtn.bar.2.png);
+        }
+
+        .tab-menu li.menuitem3{
+            background-image: url(./images/newbtn.bar.3.png);
+        }
+
+        .tab-menu li.menuitem4{
+            background-image: url(./images/newbtn.bar.4.png);
+        }
+
+        .tab-menu li.menuitem5{
+            background-image: url(./images/newbtn.bar.5.png);
+        }
+
+        .tab-menu li.menuitem6{
+            background-image: url(./images/newbtn.bar.6.png);
+        }
+
+        #imageview{
+            display : block;
+            height : 100% ;
+            margin : 0 auto;
+            border-style : double
+        }
+
+        #footer {
+            position:fixed;
+            left:0px;
+            bottom:0px;
+            height:30px;
+            width:100%;
+            background:#999;
+        }
+    </style>
+
+<script src="./libs/jquery-1.11.0.min.js"></script>
+<script src="./libs/jquery.easing.1.3.js"></script>
+
+<script>
+    function TabMenu() {
+        this.$tabMenu = null;
+        this.$menuItems = null;
+        this.$selectMenuItem = null;
+        this.$imageview = null;
+        this.urlStr = null;
+
+
+        this.init = function () {
+            this.$tabMenu = $("#tabMenu1");
+            this.$menuItems = this.$tabMenu.find("li");
+            this.$imageview = $("#imageview");
+            this.urlStr = "http://google.co.kr"
+        }
+
+        this.initEvent = function () {
+            var objThis = this;
+            this.$menuItems.on("click", function () {
+                //    objThis.setSelectItem($(this));
+                if (this.id == "menuitem_1") {
+                    objThis.urlStr = "http://www.google.co.kr";
+
+                    objThis.$imageview.fadeOut(400, function () {
+                        objThis.$imageview.attr("src", "./images/google.png");
+                    }).fadeIn(400);
+                }
+                else if(this.id == "menuitem_2"){
+                    objThis.urlStr = "http://www.naver.com";
+                    objThis.$imageview.fadeOut(400, function () {
+                        objThis.$imageview.attr("src", "./images/naver.png");
+                    }).fadeIn(400);
+                }
+                else if(this.id == "menuitem_3"){
+                    objThis.urlStr = "http://www.knu.ac.kr";
+                    objThis.$imageview.fadeOut(400, function () {
+                        objThis.$imageview.attr("src", "./images/knu.png");
+                    }).fadeIn(400);
+                }
+                else{
+                    objThis.urlStr = "http://lms.knu.ac.kr";
+                    objThis.$imageview.fadeOut(400, function () {
+                        objThis.$imageview.attr("src", "./images/lms.png");
+                    }).fadeIn(400);
+                }
+            });
+
+            this.$imageview.on("click", function () {
+                window.open("about:blank").location.href = objThis.urlStr;
+            })
+
+        }
+
+        this.setSelectItem = function ($menuItem) {
+            if (this.$selectMenuItem) {
+                this.$selectMenuItem.removeClass("select");
+            }
+
+            this.$selectMenuItem = $menuItem;
+            this.$selectMenuItem.addClass("select");
+
+
+        }
+    }
+
+    $(document).ready(function () {
+        var tabMenu = new TabMenu();
+        tabMenu.init();
+        tabMenu.initEvent();
+    });
+
+
+
+</script>
+</head>
+
+<body>
+    <div class="header">
+        <ul class="tab-menu" id="tabMenu1">
+            <li class="menuitem1" id="menuitem_1">google</li>
+            <li class="menuitem2" id="menuitem_2">naver</li>
+            <li class="menuitem3" id="menuitem_3">knu</li>
+            <li class="menuitem4" id="menuitem_4">lms</li>
+        </ul>
+    </div>
+    <div>
+        <img src="./images/google.png" alt="네이버" id="imageview" />
+    </div>
+    <div class="footer"> 이호경 교수님 컴퓨터학개론 과제  (<strong>2012061020 이장훈</strong>)</div>
+</body>
+
+</html>
